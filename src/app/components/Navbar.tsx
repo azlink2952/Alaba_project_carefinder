@@ -1,14 +1,66 @@
 'use client'
 import React from 'react';
 import Link from 'next/link';
+import { useState, useEffect } from 'react';
+import { signOut } from 'firebase/auth';
+import {auth} from '@/app/firebase/config'
+
 
 const Navbar: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+  const handleLogout = () => {
+    signOut(auth);
+    sessionStorage.removeItem('user');
+  };
+
   return (
-    <nav>
-      <ul>
-        <li><Link href="/"><a>Home</a></Link></li>
-        <li><Link href="/dashboard"><a>Dashboard</a></Link></li>
-      </ul>
+    <nav className="bg-blue-600 p-4 fixed w-full z-10 top-0 shadow">
+      <div className="container mx-auto flex justify-between items-center">
+        <div className="text-white text-xl font-bold">
+          <Link href="/" legacyBehavior>
+            <a>CareFinder</a>
+          </Link>
+        </div>
+        <div className="hidden md:flex space-x-4">
+          <Link href="/" legacyBehavior>
+            <a>Home</a>
+          </Link>
+          <Link href="/about" legacyBehavior>
+            <a>About</a>
+          </Link>
+          <Link href="/contact" legacyBehavior>
+            <a>Contact</a>
+          </Link>
+          <button onClick={() => {
+        signOut(auth)
+        sessionStorage.removeItem('user')
+        }} className="text-white">
+        Log out
+      </button>
+        </div>
+        <div className="md:hidden">
+          <button onClick={toggleMenu} className="text-white focus:outline-none">
+            ☰
+          </button>
+        </div>
+      </div>
+      {isOpen && (
+        <div className="md:hidden">
+          <Link href="#" legacyBehavior>
+            <a className="block text-white py-2 px-4 hover:bg-blue-700">Home</a>
+          </Link>
+          <Link href="#" legacyBehavior>
+            <a className="block text-white py-2 px-4 hover:bg-blue-700">About</a>
+          </Link>
+          <Link href="#" legacyBehavior>
+            <a className="block text-white py-2 px-4 hover:bg-blue-700">Contact</a>
+          </Link>
+        </div>
+      )}
     </nav>
   );
 };

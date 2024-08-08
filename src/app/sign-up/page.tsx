@@ -65,7 +65,7 @@ const SignUp = () => {
             </form>
             <p className="text-sm text-center text-gray-600">
               Already have an account?{' '}
-              <a href="#" className="text-blue-600 hover:text-blue-500">
+              <a href="/sign-in" className="text-blue-600 hover:text-blue-500">
                 Sign in
               </a>
             </p>
