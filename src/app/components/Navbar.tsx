@@ -4,7 +4,8 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { signOut } from 'firebase/auth';
 import {auth} from '@/app/firebase/config'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,17 +36,21 @@ const Navbar: React.FC = () => {
           <Link href="/contact" legacyBehavior>
             <a>Contact</a>
           </Link>
-          <button onClick={() => {
+      <button onClick={() => {
         signOut(auth)
         sessionStorage.removeItem('user')
-        }} className="text-white">
-        Log out
-      </button>
+        }}
+          className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded flex items-center gap-2"
+        >
+          <FontAwesomeIcon icon={faSignOutAlt} />
+          Log out
+        </button> 
         </div>
         <div className="md:hidden">
           <button onClick={toggleMenu} className="text-white focus:outline-none">
             ☰
           </button>
+          
         </div>
       </div>
       {isOpen && (

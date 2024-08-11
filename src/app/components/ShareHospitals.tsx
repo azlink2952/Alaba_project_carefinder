@@ -1,24 +1,49 @@
 'use client'
-import { auth, firestore } from '../firebase/config';
+import React from 'react';
+import { auth, firestore } from '../firebase/config'; 
+import hospitalData from '../../data/data.json'; 
+import { collection, addDoc } from 'firebase/firestore'; 
 
-const ShareHospitals = () => {
+type Hospital = {
+  "Hospital name": string;
+  address: string;
+  contact: string;
+};
+
+type ShareHospitalsProps = {
+  hospitals: Hospital[];
+};
+
+const ShareHospitals: React.FC<ShareHospitalsProps> = ({ hospitals }) => {
   const shareHospitals = async () => {
     const user = auth.currentUser;
-    const hospitalsRef = firestore.collection('hospitals');
-    hospitalsRef.add({
-      userId: user.uid,
-      hospitals,
-    });
-    // Send email or share link using Firebase's email and link-sharing functionalities
+    if (user) {
+      const hospitalsRef = collection(firestore, 'sharedHospitals');
+      try {
+        await addDoc(hospitalsRef, {
+          userId: user.uid,
+          hospitals,
+        });
+      } catch (error) {
+        console.error('Error sharing hospitals:', error);
+      }
+    }
   };
 
   return (
     <div className="container mx-auto p-4">
-      <button onClick={shareHospitals} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      <button
+        onClick={shareHospitals}
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      >
         Share Hospitals
       </button>
     </div>
   );
 };
 
-export default ShareHospitals;
+const defaultHospitals: Hospital[] = hospitalData;
+
+export default function ShareHospitalsContainer() {
+  return <ShareHospitals hospitals={defaultHospitals} />;
+}

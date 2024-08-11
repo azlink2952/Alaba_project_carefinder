@@ -1,15 +1,46 @@
 'use client'
-import { storage } from '../firebase/config';
+import React from 'react';
+import { saveAs } from 'file-saver';
+import { auth, firestore } from '../firebase/config'; 
+import hospitalData from '../../data/data.json'; 
+import { collection, addDoc } from 'firebase/firestore'; 
 
-const ExportHospitals = () => {
-  const exportHospitals = async () => {
-    const hospitalsRef = storage.ref('hospitals.csv');
-    hospitalsRef.putString(hospitals.map((hospital) => `${hospital.name},${hospital.location}`).join('\n'));
+type Hospital = {
+  "Hospital name": string;
+  address: string;
+  contact: string;
+};
+
+
+type ExportHospitalsProps = {
+  hospitals: Hospital[];
+};
+
+const ExportHospitals: React.FC<ExportHospitalsProps> = ({ hospitals }) => {
+  const exportToCSV = () => {
+    const csvRows = [];
+    const headers = Object.keys(hospitals[0]);
+    csvRows.push(headers.join(','));
+
+    for (const hospital of hospitals) {
+      const values = headers.map(header => {
+        const value = hospital[header as keyof typeof hospital];
+        return `"${value}"`; // Escape quotes in the value
+      });
+      csvRows.push(values.join(','));
+    }
+
+    const csvData = csvRows.join('\n');
+    const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+    saveAs(blob, 'hospitals.csv');
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <button onClick={exportHospitals} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+    <div>
+      <button
+        onClick={exportToCSV}
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      >
         Export Hospitals
       </button>
     </div>
