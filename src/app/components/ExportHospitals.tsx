@@ -1,9 +1,7 @@
 'use client'
 import React from 'react';
 import { saveAs } from 'file-saver';
-import { auth, firestore } from '../firebase/config'; 
-import hospitalData from '../../data/data.json'; 
-import { collection, addDoc } from 'firebase/firestore'; 
+import hospitalData from '../../data/data.json'
 
 type Hospital = {
   "Hospital name": string;
@@ -47,4 +45,8 @@ const ExportHospitals: React.FC<ExportHospitalsProps> = ({ hospitals }) => {
   );
 };
 
-export default ExportHospitals;
+const defaultHospitals: Hospital[] = hospitalData;
+
+export default function ExportHospitalsContainer() {
+  return <ExportHospitals hospitals={defaultHospitals} />;
+}

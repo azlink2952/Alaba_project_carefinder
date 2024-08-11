@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import hospitalData from '../../data/data.json';
 import ExportHospital from './ExportHospitals';
-
+import ShareHospital from './ShareHospitals'
+import ShareHospitalsContainer from './ShareHospitals';
 
 type Hospital = {
   "Hospital name": string;
@@ -74,8 +75,8 @@ const HospitalSearch = () => {
             <p className="text-gray-600">{selectedHospital.contact}</p>
           </div>
         )}
-
-        <ExportHospital hospitals={hospitals} />
+        <ShareHospital/>
+        <ExportHospital/>
       </div>
     </div>
   );
