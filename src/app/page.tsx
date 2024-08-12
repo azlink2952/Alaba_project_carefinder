@@ -1,19 +1,20 @@
 'use client'
 import React from "react";
+import { FC } from 'react';
 import { useEffect, useState } from "react";
 import {useAuthState} from 'react-firebase-hooks/auth'
 import {auth} from '@/app/firebase/config'
 import { useRouter } from "next/navigation";
-import { signOut } from "firebase/auth";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
+import Layout from "./layout";
 
 
 
 
 
 
-export default function Home() {
+const Home: FC = () => {
   const [user] = useAuthState(auth);
   const router = useRouter()
   const userSession = sessionStorage.getItem('user');
@@ -26,12 +27,13 @@ export default function Home() {
     router.push('/sign-up')
   }
   
-
+  
   return (
     <main className="flex flex-col min-h-screen bg-gradient-to-r from-blue-500 to-teal-500 text-white transition-colors duration-500">
       <Navbar />
 
       <Hero />
+      
 
       <div className="container mx-auto py-10 px-6 md:px-12 flex flex-col items-center">
         <h2 className="text-2xl md:text-4xl font-bold mb-4 text-center">
@@ -53,3 +55,4 @@ export default function Home() {
     </main>
   );
 }
+export default Home;

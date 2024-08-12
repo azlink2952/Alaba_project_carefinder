@@ -1,8 +1,9 @@
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHospital, faAmbulance, faHeartbeat } from '@fortawesome/free-solid-svg-icons';
+import { FC } from 'react';
 
-export default function About() {
+const AboutPage: FC = () => {
   return (
     <main className="flex flex-col min-h-screen bg-gradient-to-r from-blue-100 to-green-100 text-gray-900 transition-colors duration-500">
       <section className="container mx-auto py-12 px-6 md:px-12">
@@ -48,3 +49,5 @@ export default function About() {
     </main>
   );
 }
+
+export default AboutPage;

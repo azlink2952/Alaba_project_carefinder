@@ -18,7 +18,7 @@ const SignIn: React.FC = () => {
         sessionStorage.setItem('user', true.toString())
         setEmail('');
         setPassword('');
-        router.push('/')
+        router.push('')
     }catch(e){
         console.error(e)
     }
