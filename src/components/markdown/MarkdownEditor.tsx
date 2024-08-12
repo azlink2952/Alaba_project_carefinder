@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { db } from '../firebase/config';
+import { db } from '../../../firebase/config';
 import { collection, addDoc } from 'firebase/firestore';
 
 const MarkdownEditor = () => {

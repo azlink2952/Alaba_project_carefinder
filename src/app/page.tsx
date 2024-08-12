@@ -3,10 +3,11 @@ import React from "react";
 import { FC } from 'react';
 import { useEffect, useState } from "react";
 import {useAuthState} from 'react-firebase-hooks/auth'
-import {auth} from '@/app/firebase/config'
+import {auth} from '../../firebase/config'
 import { useRouter } from "next/navigation";
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
+import Navbar from "../components/Navbar";
+import Hero from "../components/Hero";
+import Layout from "./layout";
 
 
 
@@ -32,6 +33,12 @@ const Home: FC = () => {
       <Navbar />
 
       <Hero />
+      <Layout>
+      <div>
+        {/* Your page content here */}
+        <h1>Welcome to CareFinder</h1>
+      </div>
+    </Layout>
       
 
       <div className="container mx-auto py-10 px-6 md:px-12 flex flex-col items-center">

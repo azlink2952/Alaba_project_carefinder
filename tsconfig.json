@@ -29,17 +29,13 @@
   },
   "include": [
     "src/**/*",
-    "app/**/*",
-    "pages/**/*",
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
     "build/types/**/*.ts"
-  ],
+, "jest.config.js", "firebase"  ],
   "exclude": [
-    "node_modules",
-    ".next",
-    "public"
+    "node_modules"
   ]
 }

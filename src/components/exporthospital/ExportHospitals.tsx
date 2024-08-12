@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
 import { saveAs } from 'file-saver';
-import hospitalData from '../../data/data.json'
+import hospitalData from '../../../data/data.json'
 
 type Hospital = {
   "Hospital name": string;

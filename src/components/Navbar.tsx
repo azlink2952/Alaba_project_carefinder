@@ -3,7 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { signOut } from 'firebase/auth';
-import {auth} from '@/app/firebase/config'
+import {auth} from '../../firebase/config'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
           </Link>
         </div>
         <div className="hidden md:flex space-x-4">
-          <Link href="/page" legacyBehavior>
+          <Link href="/" legacyBehavior>
             <a>Home</a>
           </Link>
           <Link href="/about" legacyBehavior>
@@ -55,13 +55,13 @@ const Navbar: React.FC = () => {
       </div>
       {isOpen && (
         <div className="md:hidden">
-          <Link href="#" legacyBehavior>
+          <Link href="/" legacyBehavior>
             <a className="block text-white py-2 px-4 hover:bg-blue-700">Home</a>
           </Link>
-          <Link href="#" legacyBehavior>
+          <Link href="/about" legacyBehavior>
             <a className="block text-white py-2 px-4 hover:bg-blue-700">About</a>
           </Link>
-          <Link href="#" legacyBehavior>
+          <Link href="/contact" legacyBehavior>
             <a className="block text-white py-2 px-4 hover:bg-blue-700">Contact</a>
           </Link>
         </div>

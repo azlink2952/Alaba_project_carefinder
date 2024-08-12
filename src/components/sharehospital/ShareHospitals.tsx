@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
-import { auth, firestore } from '../firebase/config'; 
-import hospitalData from '../../data/data.json'; 
+import { auth, firestore } from '../../../firebase/config'; 
+import hospitalData from '../../../data/data.json'; 
 import { collection, addDoc } from 'firebase/firestore'; 
 
 type Hospital = {

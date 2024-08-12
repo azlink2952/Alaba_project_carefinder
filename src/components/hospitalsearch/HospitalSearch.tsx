@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import hospitalData from '../../data/data.json';
-import ExportHospital from './ExportHospitals';
-import ShareHospital from './ShareHospitals'
-import ShareHospitalsContainer from './ShareHospitals';
+import hospitalData from '../../../data/data.json';
+import ExportHospital from '../exporthospital/ExportHospitals';
+import ShareHospital from '../sharehospital/ShareHospitals'
 
 type Hospital = {
   "Hospital name": string;

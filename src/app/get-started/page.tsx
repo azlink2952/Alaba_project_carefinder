@@ -1,16 +1,13 @@
 'use client'
 import Head from 'next/head';
-import HospitalSearch from '../components/HospitalSearch';
-import ExportHospitals from '../components/ExportHospitals';
-import ShareHospitals from '../components/ShareHospitals';
-import MarkdownEditor from '../components/MarkdownEditor';
+import HospitalSearch from '../../components/hospitalsearch/HospitalSearch';
+import ExportHospitals from '../../components/exporthospital/ExportHospitals';
+import ShareHospitals from '../../components/sharehospital/ShareHospitals';
+import MarkdownEditor from '../../components/markdown/MarkdownEditor';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { Hospital } from '@/types/Hospital';
 
-const hospitals: Hospital[] = [
-  
-];
+
 const GetStarted = () => {
   const router = useRouter()
   useEffect(() => {
