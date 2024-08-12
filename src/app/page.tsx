@@ -7,7 +7,6 @@ import {auth} from '@/app/firebase/config'
 import { useRouter } from "next/navigation";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import Layout from "./layout";
 
 
 
