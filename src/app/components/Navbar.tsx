@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
           </Link>
         </div>
         <div className="hidden md:flex space-x-4">
-          <Link href="/" legacyBehavior>
+          <Link href="/page" legacyBehavior>
             <a>Home</a>
           </Link>
           <Link href="/about" legacyBehavior>
