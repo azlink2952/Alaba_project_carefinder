@@ -17,7 +17,8 @@ import Layout from "./layout";
 const Home: FC = () => {
   const [user] = useAuthState(auth);
   const router = useRouter()
-  const userSession = sessionStorage.getItem('user');
+  const userSession = 
+  typeof window !== 'undefined' ? sessionStorage.getItem('user') : null
   
   
 
