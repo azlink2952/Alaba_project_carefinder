@@ -23,7 +23,7 @@ const Contact = () => {
           <div className="w-full md:w-1/2">
             <h3 className="text-xl font-semibold mb-2">Send Us a Message</h3>
             <form 
-              action="/api/contact" // Update with your form handler URL
+              action="/api/contact" 
               method="POST"
               className="flex flex-col space-y-4"
             >
