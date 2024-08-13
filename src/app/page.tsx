@@ -17,6 +17,8 @@ import Layout from "./layout";
 const Home: FC = () => {
   const [user] = useAuthState(auth);
   const router = useRouter()
+
+  useEffect(() => {
   const userSession = 
   typeof window !== 'undefined' ? sessionStorage.getItem('user') : null
   
@@ -27,6 +29,7 @@ const Home: FC = () => {
   if (!user && !userSession){
     router.push('/sign-up')
   }
+}, [user, router])
   
   
   return (
