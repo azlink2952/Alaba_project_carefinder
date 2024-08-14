@@ -41,16 +41,16 @@ const SignIn: React.FC = () => {
             />
           </div>
           <div className="mb-6">
-            <label htmlFor="password" className="block text-gray-700">Password</label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded mt-2 focus:ring focus:ring-blue-200 focus:outline-none"
-              required
-            />
-          </div>
+          <label htmlFor="password" className="block text-gray-700">Password</label>
+          <input
+            type="text" // Changed from "password" to "text"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded mt-2 focus:ring focus:ring-blue-200 focus:outline-none"
+            required
+          />
+        </div>
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition duration-200"
