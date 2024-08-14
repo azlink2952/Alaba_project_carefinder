@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { signOut } from 'firebase/auth';
 import {auth} from '../../firebase/config'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,6 +13,7 @@ const Navbar: React.FC = () => {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
   const handleLogout = () => {
     signOut(auth);
     sessionStorage.removeItem('user');
@@ -36,21 +37,18 @@ const Navbar: React.FC = () => {
           <Link href="/contact" legacyBehavior>
             <a>Contact</a>
           </Link>
-      <button onClick={() => {
-        signOut(auth)
-        sessionStorage.removeItem('user')
-        }}
-          className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded flex items-center gap-2 text-[13px]"
-        >
-          <FontAwesomeIcon icon={faSignOutAlt} />
-          log out
-        </button> 
+          <button 
+            onClick={handleLogout}
+            className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded flex items-center gap-2 text-[13px]"
+          >
+            <FontAwesomeIcon icon={faSignOutAlt} />
+            Log out
+          </button>
         </div>
         <div className="md:hidden">
-          <button onClick={toggleMenu} className="text-white focus:outline-none">
+          <button onClick={toggleMenu} className="text-white focus:outline-none text-2xl">
             ☰
           </button>
-          
         </div>
       </div>
       {isOpen && (
@@ -64,6 +62,13 @@ const Navbar: React.FC = () => {
           <Link href="/contact" legacyBehavior>
             <a className="block text-white py-2 px-4 hover:bg-blue-700">Contact</a>
           </Link>
+          <button 
+            onClick={handleLogout}
+            className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded flex items-center gap-2 mx-4 mt-2 text-[13px]"
+          >
+            <FontAwesomeIcon icon={faSignOutAlt} />
+            Log out
+          </button>
         </div>
       )}
     </nav>
