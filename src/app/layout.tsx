@@ -2,7 +2,7 @@ import '../globals.css'
 import React from 'react';
 import Head from 'next/head';
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
@@ -13,3 +13,5 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     </html>
   );
 }
+
+export default Layout
