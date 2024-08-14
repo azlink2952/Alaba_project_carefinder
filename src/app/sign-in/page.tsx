@@ -1,26 +1,31 @@
 'use client'
-import  { useState } from 'react';
-import {useSignInWithEmailAndPassword} from 'react-firebase-hooks/auth'
-import {auth} from '../../../firebase/config'
+import { useState } from 'react';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { auth } from '../../../firebase/config';
 import { useRouter } from 'next/navigation';
 
 const SignIn: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
-  const router = useRouter()
+  const [showSuccess, setShowSuccess] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-        const res = await signInWithEmailAndPassword(email, password)
-        console.log({res});
-        sessionStorage.setItem('user', true.toString())
-        setEmail('');
-        setPassword('');
-        router.push('/')
-    }catch(e){
-        console.error(e)
+      const res = await signInWithEmailAndPassword(email, password);
+      console.log({ res });
+      sessionStorage.setItem('user', true.toString());
+      setEmail('');
+      setPassword('');
+      setShowSuccess(true);
+
+      setTimeout(() => {
+        router.push('/');
+      }, 2000); 
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -41,16 +46,16 @@ const SignIn: React.FC = () => {
             />
           </div>
           <div className="mb-6">
-          <label htmlFor="password" className="block text-gray-700">Password</label>
-          <input
-            type="text" // Changed from "password" to "text"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded mt-2 focus:ring focus:ring-blue-200 focus:outline-none"
-            required
-          />
-        </div>
+            <label htmlFor="password" className="block text-gray-700">Password</label>
+            <input
+              type="text"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full p-2 border border-gray-300 rounded mt-2 focus:ring focus:ring-blue-200 focus:outline-none"
+              required
+            />
+          </div>
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition duration-200"
@@ -58,6 +63,17 @@ const SignIn: React.FC = () => {
             Sign In
           </button>
         </form>
+        {showSuccess && (
+          <div className="mt-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded transition-opacity duration-500 ease-in-out opacity-100">
+            Sign in success!
+          </div>
+        )}
+        <div className="mt-4 text-center">
+          <p className="text-gray-600">Don't have an account?</p>
+          <a href="/sign-up" className="text-blue-600 hover:text-blue-500">
+            Sign up here
+          </a>
+        </div>
       </div>
     </div>
   );
