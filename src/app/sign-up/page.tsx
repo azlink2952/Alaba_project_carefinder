@@ -1,7 +1,9 @@
 'use client'
 import { useState } from 'react';
 import { createUserWithEmailAndPassword, fetchSignInMethodsForEmail, getAuth } from 'firebase/auth';
-import {auth} from '../../../firebase/config'
+import { auth } from '../../../firebase/config';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -30,8 +32,12 @@ const SignUp = () => {
       }, 3000); 
     } catch (e) {
       console.error(e);
-      setError('email already exists.');
+      setError('This email is already registered.');
     }
+  };
+
+  const handleCancel = () => {
+    setError(null); // Clears the error message when the icon is clicked
   };
 
   return (
@@ -85,8 +91,13 @@ const SignUp = () => {
         )}
         {error && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="p-6 bg-red-500 text-white rounded-lg shadow-lg transform transition-transform duration-500 ease-in-out scale-100">
+            <div className="relative p-6 bg-red-500 text-white rounded-lg shadow-lg transform transition-transform duration-500 ease-in-out scale-100">
               {error}
+              <FontAwesomeIcon
+                icon={faTimes}
+                onClick={handleCancel}
+                className="absolute top-2 right-2 text-white cursor-pointer hover:text-gray-300"
+              />
             </div>
           </div>
         )}

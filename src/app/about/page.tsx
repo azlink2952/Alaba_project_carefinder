@@ -1,20 +1,43 @@
+'use client'
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHospital, faAmbulance, faHeartbeat } from '@fortawesome/free-solid-svg-icons';
+import { faHospital, faAmbulance, faHeartbeat, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { useRouter } from 'next/navigation';
 import { FC } from 'react';
 
 const AboutPage: FC = () => {
+  const router = useRouter();
+
+  const handleBackClick = () => {
+    router.back(); 
+  };
+
   return (
-    <main className="flex flex-col min-h-screen bg-gradient-to-r from-blue-100 to-green-100 text-gray-900 transition-colors duration-500">
+    <main className="flex flex-col min-h-screen bg-gradient-to-r from-blue-100 to-green-100 text-gray-900 transition-colors duration-500 overflow-y-scroll scroll-smooth">
       <section className="container mx-auto py-12 px-6 md:px-12">
+        <div className="mb-4 flex items-center">
+          <button onClick={handleBackClick} className="flex items-center text-blue-600 hover:text-blue-500 transition-colors duration-200">
+            <FontAwesomeIcon icon={faArrowLeft} className="mr-2" />
+            Back
+          </button>
+        </div>
+
+        <nav className="mb-6 text-sm text-gray-600">
+          <ol className="list-reset flex">
+            <li><a href="/" className="text-blue-600 hover:text-blue-500">Home</a></li>
+            <li><span className="mx-2">/</span></li>
+            <li>About CareFinder</li>
+          </ol>
+        </nav>
+
         <h1 className="text-3xl md:text-5xl font-bold text-center mb-8 transition-transform duration-500 transform hover:scale-105">
           About CareFinder
         </h1>
-        <p className="text-lg md:text-xl mb-6 leading-relaxed text-center">
+        <p className="text-lg md:text-xl mb-6 leading-relaxed text-center transition-transform duration-500 transform hover:scale-105">
           Welcome to CareFinder, your ultimate healthcare companion in Nigeria. We are dedicated to providing you with the most accurate and up-to-date information about hospitals and healthcare services across the country. Whether you&rsquo;re looking for immediate medical assistance or planning ahead, CareFinder is designed to support your healthcare needs with ease and efficiency.
         </p>
         
-        <section className="bg-white rounded-lg shadow-lg p-6 md:p-12 mb-8">
+        <section className="bg-white rounded-lg shadow-lg p-6 md:p-12 mb-8 transition-transform duration-500 transform hover:scale-105">
           <h2 className="text-2xl md:text-3xl font-semibold mb-4">
             Why Choose CareFinder?
           </h2>
@@ -34,7 +57,7 @@ const AboutPage: FC = () => {
           </ul>
         </section>
         
-        <section className="bg-gray-100 rounded-lg shadow-lg p-6 md:p-12">
+        <section className="bg-gray-100 rounded-lg shadow-lg p-6 md:p-12 transition-transform duration-500 transform hover:scale-105">
           <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-center">
             How CareFinder Can Help You
           </h2>
