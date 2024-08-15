@@ -1,14 +1,12 @@
-// src/app/api/contact/route.ts
 import nodemailer from 'nodemailer';
 import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
   try {
-    // Ensure that request.json() is used to parse the JSON body
     const { name, email, message } = await request.json();
 
     const transporter = nodemailer.createTransport({
-      service: 'Gmail', // Or another email service provider
+      service: 'Gmail',
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
