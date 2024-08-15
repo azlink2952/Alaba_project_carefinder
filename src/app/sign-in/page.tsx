@@ -9,13 +9,16 @@ const SignIn: React.FC = () => {
   const [password, setPassword] = useState('');
   const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError(null); // Reset error state
     try {
       const res = await signInWithEmailAndPassword(email, password);
-      console.log({ res });
+      if (!res) throw new Error('User not found');
+      
       sessionStorage.setItem('user', true.toString());
       setEmail('');
       setPassword('');
@@ -24,7 +27,12 @@ const SignIn: React.FC = () => {
       setTimeout(() => {
         router.push('/');
       }, 2000); 
-    } catch (e) {
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        setError(e.message); // Display the error message
+      } else {
+        setError('An unexpected error occurred'); // Fallback for non-Error objects
+      }
       console.error(e);
     }
   };
@@ -48,7 +56,7 @@ const SignIn: React.FC = () => {
           <div className="mb-6">
             <label htmlFor="password" className="block text-gray-700">Password</label>
             <input
-              type="text"
+              type="password"
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -63,16 +71,21 @@ const SignIn: React.FC = () => {
             Sign In
           </button>
         </form>
+        {error && (
+          <div className="mt-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+            {error}
+          </div>
+        )}
         {showSuccess && (
           <div className="mt-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded transition-opacity duration-500 ease-in-out opacity-100">
             Sign in success!
           </div>
         )}
         <div className="mt-4 text-center">
-          <p className="text-gray-600">Do not have an account?</p>
+          <p className="text-gray-600">Do not have an account? &nbsp;
           <a href="/sign-up" className="text-blue-600 hover:text-blue-500">
             Sign up here
-          </a>
+          </a></p>
         </div>
       </div>
     </div>
