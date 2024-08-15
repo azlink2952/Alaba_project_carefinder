@@ -17,7 +17,7 @@ const SignIn: React.FC = () => {
     setError(null); // Reset error state
     try {
       const res = await signInWithEmailAndPassword(email, password);
-      if (!res) throw new Error('User not found');
+      if (!res) throw new Error('email or password incorrect!');
       
       sessionStorage.setItem('user', true.toString());
       setEmail('');
