@@ -14,7 +14,7 @@ const Home: FC = () => {
 
   useEffect(() => {
     if (!user && !sessionStorage.getItem('signedUp')) {
-      router.push('/sign-up'); // Use router.push instead of window.location.href
+      router.push('/sign-up'); 
     }
   }, [user, router]);
 

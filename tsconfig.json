@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
+    "target": "es5",
     "lib": [
       "dom",
+      "es5",
       "dom.iterable",
       "esnext"
     ],
@@ -26,11 +28,13 @@
       "@/*": [
         "./src/*"
       ]
-    }
+    },
+    "types": ["cypress"]
   },
   "include": [
     "src/**/*",
     "next-env.d.ts",
+    "**/*.ts", "**/*.tsx",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
